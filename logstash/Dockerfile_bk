@@ -1,0 +1,18 @@
+# https://github.com/elastic/logstash-docker
+FROM docker.elastic.co/logstash/logstash-oss:6.2.4
+
+# Add your logstash plugins setup here
+# Example: RUN logstash-plugin install logstash-filter-json
+
+#Input de RSS
+RUN logstash-plugin install logstash-input-rss
+#Input de Twitter
+RUN logstash-plugin install logstash-input-twitter
+
+RUN logstash-plugin install logstash-filter-rest
+
+#COPY config.conf config/
+CMD ["-f", "config/config.conf"]
+CMD ["-p", "/opt/logstash/inputs/lib"]
+
+#ADD pipe???
